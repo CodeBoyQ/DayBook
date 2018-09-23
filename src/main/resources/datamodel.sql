@@ -23,12 +23,16 @@ DROP TABLE IF EXISTS `daybook_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `daybook_item` (
-  `Id` int(11) NOT NULL,
-  `date` datetime NOT NULL,
-  `text` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`Id`),
-  UNIQUE KEY `date_UNIQUE` (`date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `text` varchar(45) NOT NULL,
+  `image_path` varchar(255) DEFAULT NULL,
+  `image_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 = empty / 1 = image present / 2 = image present and starred',
+  `published` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `date_UNIQUE` (`date`),
+  KEY `idx_daybook_item_date` (`date`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +41,7 @@ CREATE TABLE `daybook_item` (
 
 LOCK TABLES `daybook_item` WRITE;
 /*!40000 ALTER TABLE `daybook_item` DISABLE KEYS */;
+INSERT INTO `daybook_item` VALUES (1,'2018-09-18','Obiddddobi',NULL,0,0);
 /*!40000 ALTER TABLE `daybook_item` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-22 19:53:01
+-- Dump completed on 2018-09-23 17:36:23

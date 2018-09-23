@@ -25,22 +25,22 @@ public class ItemService implements IItemService {
     }
 
     @Override
-    public synchronized boolean addItem(Item article) {
-        if (itemDao.itemExists("todo1", "todo2")) {
+    public synchronized boolean addItem(Item item) {
+        if (itemDao.itemExists(item.getDate())) {
             return false;
         } else {
-            itemDao.addItem(article);
+            itemDao.addItem(item);
             return true;
         }
     }
 
     @Override
-    public void updateItem(Item article) {
-        itemDao.updateItem(article);
+    public void updateItem(Item item) {
+        itemDao.updateItem(item);
     }
 
     @Override
-    public void deleteItem(int articleId) {
-        itemDao.deleteItem(articleId);
+    public void deleteItem(int itemId) {
+        itemDao.deleteItem(itemId);
     }
 }

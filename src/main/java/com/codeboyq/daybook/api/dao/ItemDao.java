@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.sql.Date;
 import java.util.List;
 
 @Transactional
@@ -18,8 +19,8 @@ public class ItemDao implements IItemDao {
     @SuppressWarnings("unchecked")
     @Override
     public List<Item> getAllItems() {
-        String hql = "FROM daybook_item ORDER BY id";
-        return (List<Item>) entityManager.createQuery(hql).getResultList();
+        String query = "FROM Item ORDER BY id";
+        return (List<Item>) entityManager.createQuery(query).getResultList();
     }
 
     @Override
@@ -45,11 +46,11 @@ public class ItemDao implements IItemDao {
         entityManager.remove(getItemById(id));
     }
 
-    @Override //TODO: Fixen
-    public boolean itemExists(String title, String category) {
-        String hql = "FROM Item as atcl WHERE atcl.title = ? and atcl.category = ?";
-        int count = entityManager.createQuery(hql).setParameter(1, title)
-                .setParameter(2, category).getResultList().size();
+    @Override
+    public boolean itemExists(Date datum) {
+        String query = "select * FROM Item WHERE date = ?";
+        int count = entityManager.createQuery(query).setParameter(1, datum)
+                .getResultList().size();
         return count > 0 ? true : false;
     }
 }
