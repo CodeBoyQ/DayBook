@@ -60,10 +60,9 @@ public class ItemController {
     }
 
     @PostMapping("/v1/items")
-    public ResponseEntity<List<ItemDto>> createItem(@RequestBody ItemDto item) {
-        List<ItemDto> items = new ArrayList<>();
-        itemService.getAllItems().forEach(itemEntity -> items.add(convertToDto(itemEntity)));
-        return new ResponseEntity<List<ItemDto>>(items, HttpStatus.OK);
+    public ResponseEntity<Void> createItem(@RequestBody ItemDto item) {
+        itemService.addItem(convertToEntity(item));
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @GetMapping("/v1/itemsold")

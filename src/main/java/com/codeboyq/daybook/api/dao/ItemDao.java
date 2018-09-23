@@ -48,9 +48,8 @@ public class ItemDao implements IItemDao {
 
     @Override
     public boolean itemExists(Date datum) {
-        String query = "select * FROM Item WHERE date = ?";
-        int count = entityManager.createQuery(query).setParameter(1, datum)
-                .getResultList().size();
+        String query = "FROM Item WHERE date = ?";
+        int count = entityManager.createQuery(query).setParameter(0, datum).getResultList().size();
         return count > 0 ? true : false;
     }
 }
