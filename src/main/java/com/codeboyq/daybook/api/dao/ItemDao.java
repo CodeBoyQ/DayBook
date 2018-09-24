@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Transactional
@@ -46,7 +46,7 @@ public class ItemDao implements IItemDao {
     }
 
     @Override
-    public boolean itemExists(Date datum) {
+    public boolean itemExists(LocalDate datum) {
         String query = "FROM Item WHERE date = ?";
         int count = entityManager.createQuery(query).setParameter(0, datum).getResultList().size();
         return count > 0 ? true : false;

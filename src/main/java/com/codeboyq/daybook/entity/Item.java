@@ -2,7 +2,7 @@ package com.codeboyq.daybook.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 
 @Entity
@@ -17,7 +17,7 @@ public class Item implements Serializable {
     private int id;
 
     @Column(name = "date")
-    private Date date; //note: using sql Date //TODO: Wat als ik een andere Date gebruik?
+    private LocalDate date;
 
     @Column(name = "text")
     private String text;
@@ -39,11 +39,11 @@ public class Item implements Serializable {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

@@ -1,11 +1,11 @@
 package com.codeboyq.daybook.api.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ItemDto {
 
     private int id;
-    private Date date; //TODO: Use other class?
+    private LocalDate date; //TODO: Use other class?
     private String text;
     private String imageString;
     private int imageStatus;
@@ -15,7 +15,7 @@ public class ItemDto {
 
     }
 
-    public ItemDto(int id, Date date, String text, boolean published) {
+    public ItemDto(int id, LocalDate date, String text, boolean published) {
         this.id = id;
         this.date = date;
         this.text = text;
@@ -33,11 +33,11 @@ public class ItemDto {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

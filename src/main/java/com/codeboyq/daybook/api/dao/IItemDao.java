@@ -2,7 +2,7 @@ package com.codeboyq.daybook.api.dao;
 
 import com.codeboyq.daybook.entity.Item;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IItemDao {
@@ -11,7 +11,7 @@ public interface IItemDao {
         Item getItemById(int itemId);
         void addItem(Item item);
         void updateItem(Item item);
-        void deleteItem(int articleId);
-        boolean itemExists(Date date);
+        void deleteItem(int itemId);
+        boolean itemExists(LocalDate date);
 
 }
