@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -62,13 +61,19 @@ public class ItemController {
     @PostMapping("/v1/items")
     public ResponseEntity<Void> createItem(@RequestBody ItemDto item) {
         itemService.addItem(convertToEntity(item));
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/v1/itemsold")
-    @ResponseBody
-    public ItemDto getItemsold(@RequestParam(name = "id", required = false, defaultValue = "Stranger") String name) {
-        return new ItemDto(3, new Date(), "Dit is de tekst van het item", true);
+    @PutMapping("/v1/items")
+    public ResponseEntity<Void> updateitem(@RequestBody ItemDto item) {
+        itemService.updateItem(convertToEntity(item));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/v1/items/{id}")
+    public ResponseEntity<Void> deletItem(@PathVariable("id") int id) {
+        itemService.deleteItem(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     private ItemDto convertToDto(Item item) {

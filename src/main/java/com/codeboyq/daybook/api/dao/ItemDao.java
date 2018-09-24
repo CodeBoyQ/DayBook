@@ -16,7 +16,6 @@ public class ItemDao implements IItemDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @SuppressWarnings("unchecked")
     @Override
     public List<Item> getAllItems() {
         String query = "FROM Item ORDER BY id";

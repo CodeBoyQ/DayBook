@@ -14,8 +14,8 @@ public class ItemService implements IItemService {
     private IItemDao itemDao;
 
     @Override
-    public Item getItemById(int articleId) {
-        Item obj = itemDao.getItemById(articleId);
+    public Item getItemById(int itemId) {
+        Item obj = itemDao.getItemById(itemId);
         return obj;
     }
 
