@@ -5,9 +5,9 @@ import java.time.LocalDate;
 public class ItemDto {
 
     private int id;
-    private LocalDate date; //TODO: Use other class?
+    private LocalDate date;
     private String text;
-    private String imageString;
+    private String imagePath;
     private int imageStatus;
     private boolean published;
 
@@ -19,7 +19,7 @@ public class ItemDto {
         this.id = id;
         this.date = date;
         this.text = text;
-        this.imageString = "";
+        this.imagePath = "";
         this.imageStatus = 0;
         this.published = published;
 
@@ -49,12 +49,12 @@ public class ItemDto {
         this.text = text;
     }
 
-    public String getImageString() {
-        return imageString;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImageString(String imageString) {
-        this.imageString = imageString;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public int getImageStatus() {

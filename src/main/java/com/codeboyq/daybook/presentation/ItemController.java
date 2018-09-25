@@ -59,9 +59,11 @@ public class ItemController {
     }
 
     @PostMapping("/v1/items")
-    public ResponseEntity<Void> createItem(@RequestBody ItemDto item) {
-        itemService.addItem(convertToEntity(item));
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<String> createItem(@RequestBody ItemDto item) {
+        if (itemService.addItem(convertToEntity(item))) {
+            return new ResponseEntity<String>("Succes!", HttpStatus.OK);
+        }
+        return new ResponseEntity<String>("Duplicate entry", HttpStatus.FORBIDDEN);
     }
 
     @PutMapping("/v1/items")

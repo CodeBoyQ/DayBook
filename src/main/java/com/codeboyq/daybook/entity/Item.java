@@ -29,7 +29,7 @@ public class Item implements Serializable {
     private int imageStatus;
 
     @Column(name = "published")
-    private Boolean published; //TODO: Wat als ik boolean gebruik?
+    private boolean published;
 
     public int getId() {
         return id;
