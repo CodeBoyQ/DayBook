@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Service
 public class PictureService implements IPictureService {
 
-    public static String  REPOSITORY = "src/resources/repo";
+    public static String  REPOSITORY = "src/main/resources/repo";
 
     public Path storeImage(Item item, InputStream is) throws Exception {
         LocalDate date = item.getDate();
