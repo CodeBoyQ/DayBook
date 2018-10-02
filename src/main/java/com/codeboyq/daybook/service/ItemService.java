@@ -5,6 +5,8 @@ import com.codeboyq.daybook.entity.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.List;
 
 @Service
@@ -12,6 +14,9 @@ public class ItemService implements IItemService {
 
     @Autowired
     private IItemDao itemDao;
+
+    @Autowired
+    private PictureService pictureService;
 
     @Override
     public Item getItemById(int itemId) {
@@ -25,18 +30,25 @@ public class ItemService implements IItemService {
     }
 
     @Override
-    public synchronized boolean addItem(Item item) {
+    public synchronized Item addItem(Item item) {
         if (itemDao.itemExists(item.getDate())) {
-            return false;
+            return null;
         } else {
-            itemDao.addItem(item);
-            return true;
+            return itemDao.addItem(item);
         }
     }
 
     @Override
     public void updateItem(Item item) {
         itemDao.updateItem(item);
+    }
+
+    @Override
+    public void setImage(int itemId, InputStream is) throws Exception {
+        Item item = getItemById(itemId);
+        Path storedPath = pictureService.storeImage(item, is);
+        item.setImagePath(storedPath.toString());
+        updateItem(item);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.codeboyq.daybook.service;
 
 import com.codeboyq.daybook.entity.Item;
 
+import java.io.InputStream;
 import java.util.List;
 
 public interface IItemService {
@@ -9,9 +10,11 @@ public interface IItemService {
 
     Item getItemById(int itemId);
 
-    boolean addItem(Item item);
+    Item addItem(Item item);
 
     void updateItem(Item item);
 
     void deleteItem(int itemId);
+
+    void setImage (int itemId, InputStream is) throws Exception;
 }

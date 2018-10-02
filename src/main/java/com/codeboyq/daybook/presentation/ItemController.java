@@ -27,13 +27,13 @@ public class ItemController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @GetMapping("/v1/uploadFile")
-    public ResponseEntity<FileUploadResponseDto> uploadFile(@RequestParam(name = "tokinput", required = false, defaultValue = "wakadaka") String tokyo, @RequestParam("file") MultipartFile mpFile) {
+    @PutMapping("/v1/setimage")
+    public ResponseEntity<FileUploadResponseDto> uploadFile(@RequestParam(name = "id", required = true) String itemId, @RequestParam("image") MultipartFile imageFile) {
 
 
-        String fileName = mpFile.getOriginalFilename() + " " + tokyo;
+        String fileName = imageFile.getOriginalFilename() + " " + itemId;
 
-
+       // imageFile.getInputStream()
 //        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 //                .path("/downloadFile/")
 //                .path(fileName)
@@ -41,8 +41,8 @@ public class ItemController {
 
 
 
-        FileUploadResponseDto frDto = new FileUploadResponseDto(fileName, "Dit is waar het bestand terecht is gekomen" + tokyo,
-                mpFile.getContentType(), mpFile.getSize());
+        FileUploadResponseDto frDto = new FileUploadResponseDto(fileName, "Dit is waar het bestand terecht is gekomen" + itemId,
+                imageFile.getContentType(), imageFile.getSize());
         return new ResponseEntity<FileUploadResponseDto>(frDto, HttpStatus.OK);
     }
 
@@ -59,11 +59,15 @@ public class ItemController {
     }
 
     @PostMapping("/v1/items")
-    public ResponseEntity<String> createItem(@RequestBody ItemDto item) {
-        if (itemService.addItem(convertToEntity(item))) {
-            return new ResponseEntity<String>("Succes!", HttpStatus.OK);
+    public ResponseEntity<ItemDto> createItem(@RequestBody ItemDto item) {
+
+        Item newItem = itemService.addItem(convertToEntity(item));
+
+        if (newItem!=null) {
+            return new ResponseEntity<ItemDto>(convertToDto(newItem), HttpStatus.OK);
         }
-        return new ResponseEntity<String>("Duplicate entry", HttpStatus.FORBIDDEN);
+
+        return new ResponseEntity<ItemDto>(HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @PutMapping("/v1/items")

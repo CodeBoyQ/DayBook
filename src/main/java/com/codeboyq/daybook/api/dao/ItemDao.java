@@ -28,8 +28,10 @@ public class ItemDao implements IItemDao {
     }
 
     @Override
-    public void addItem(Item item) {
+    public Item addItem(Item item) {
         entityManager.persist(item);
+        entityManager.flush();
+        return item;
     }
 
     @Override
