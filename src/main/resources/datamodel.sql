@@ -32,18 +32,8 @@ CREATE TABLE `daybook_item` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `date_UNIQUE` (`date`),
   KEY `idx_daybook_item_date` (`date`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `daybook_item`
---
-
-LOCK TABLES `daybook_item` WRITE;
-/*!40000 ALTER TABLE `daybook_item` DISABLE KEYS */;
-INSERT INTO `daybook_item` VALUES (1,'2018-09-18','Obiddddobi',NULL,0,0);
-/*!40000 ALTER TABLE `daybook_item` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -54,4 +44,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-23 17:36:23
+-- Dump completed on 2018-10-04  0:19:22
