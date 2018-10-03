@@ -2,6 +2,8 @@ package com.codeboyq.daybook.service;
 
 import com.codeboyq.daybook.DayBookException;
 import com.codeboyq.daybook.entity.Item;
+import org.slf4j.ext.XLogger;
+import org.slf4j.ext.XLoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,10 @@ public class PictureService implements IPictureService {
 
     public static String  REPOSITORY = "src/main/resources/repo";
 
+    private static final XLogger logger = XLoggerFactory.getXLogger(PictureService.class);
+
     public Path storeImage(Item item, InputStream is, String dosExtension) throws DayBookException {
+        logger.entry();
         LocalDate date = item.getDate();
         if (date == null) {
             throw new DayBookException("Item has an empty date!");
@@ -59,15 +64,16 @@ public class PictureService implements IPictureService {
             throw new DayBookException(e);
         }
 
-        return filePath;
+        return logger.exit(filePath);
     }
 
     public Resource retrieveImage(Item item) throws DayBookException {
+        logger.entry(item);
         try {
             Path filePath = Paths.get(item.getImagePath()).normalize();
             Resource resource = new UrlResource(filePath.toUri());
             if(resource.exists()) {
-                return resource;
+                return logger.exit(resource);
             } else {
                 throw new DayBookException("File not found");
             }

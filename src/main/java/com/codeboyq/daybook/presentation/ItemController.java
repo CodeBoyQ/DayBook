@@ -7,6 +7,8 @@ import com.codeboyq.daybook.api.dto.ItemDto;
 import com.codeboyq.daybook.entity.Item;
 import com.codeboyq.daybook.service.IItemService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.ext.XLogger;
+import org.slf4j.ext.XLoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -27,6 +29,8 @@ import java.util.List;
 @RequestMapping("/" + MainApp.REST_URL_BASE)
 
 public class ItemController {
+
+    private static final XLogger logger = XLoggerFactory.getXLogger(MainApp.class);
 
     @Autowired
     private IItemService itemService;
