@@ -28,8 +28,8 @@ public class ItemController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @PutMapping("/v1/setimage")
-    public ResponseEntity<?> uploadFile(@RequestParam(name = "id", required = true) int itemId, @RequestParam("image") MultipartFile imageFile) throws Exception {
+    @PutMapping("/v1/items/{id}/setimage")
+    public ResponseEntity<?> uploadFile(@PathVariable(name = "id", required = true) int itemId, @RequestParam("image") MultipartFile imageFile) throws Exception {
 
         String dosExtension;
         if (imageFile.getContentType().equals("image/jpeg")) {
