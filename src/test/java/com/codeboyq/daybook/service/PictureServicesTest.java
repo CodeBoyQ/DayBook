@@ -45,6 +45,27 @@ public class PictureServicesTest {
 
         Assert.assertEquals(Paths.get(PictureService.REPOSITORY, "2018", "08", "23.jpg"), destinationPath);
 
+
+
+
+    }
+
+    @Test
+    public void testGetImage() throws Exception {
+
+        //Create test item
+        Item item = new Item();
+        item.setDate(LocalDate.parse("2018-08-21"));
+        item.setText("Heel veel mooie dingen!");
+        item.setImagePath("src/main/resources/repo/2018/11/16.png");
+        item.setImageStatus(1);
+        item.setPublished(false);
+
+        //Get image
+       // Resource image = pictureService.getImage(item);
+        //System.out.println(image.exists());
+
+
     }
 
 

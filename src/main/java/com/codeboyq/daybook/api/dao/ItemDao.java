@@ -35,11 +35,12 @@ public class ItemDao implements IItemDao {
     }
 
     @Override
-    public void updateItem(Item item) {
+    public Item updateItem(Item item) {
         Item uItem = getItemById(item.getId());
         uItem.setDate(item.getDate());
         uItem.setText(item.getText());
         entityManager.flush();
+        return uItem;
     }
 
     @Override
@@ -51,6 +52,13 @@ public class ItemDao implements IItemDao {
     public boolean itemExists(LocalDate datum) {
         String query = "FROM Item WHERE date = ?";
         int count = entityManager.createQuery(query).setParameter(0, datum).getResultList().size();
+        return count > 0 ? true : false;
+    }
+
+    @Override
+    public boolean itemExists(LocalDate datum, int excludedId) {
+        String query = "FROM Item WHERE date = ? and id <> ?";
+        int count = entityManager.createQuery(query).setParameter(0, datum).setParameter(1, excludedId).getResultList().size();
         return count > 0 ? true : false;
     }
 }

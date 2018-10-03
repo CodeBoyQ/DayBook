@@ -10,8 +10,9 @@ public interface IItemDao {
         List<Item> getAllItems();
         Item getItemById(int itemId);
         Item addItem(Item item);
-        void updateItem(Item item);
+        Item updateItem(Item item);
         void deleteItem(int itemId);
         boolean itemExists(LocalDate date);
+        boolean itemExists(LocalDate date, int excludedId);
 
 }
