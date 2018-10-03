@@ -56,22 +56,32 @@ public class ItemService implements IItemService {
     }
 
     @Override
+    public void deleteItem(int itemId) {
+        itemDao.deleteItem(itemId);
+    }
+
+    @Override
     public Path setImage(int itemId, InputStream is, String dosExtension) throws DayBookException {
         Item item = getItemById(itemId);
         Path storedPath = pictureService.storeImage(item, is, dosExtension);
         item.setImagePath(storedPath.toString());
+        item.setImageStatus(1);
         updateItem(item);
         return storedPath;
     }
 
     @Override
-    public Resource getImage (int itemId) throws Exception {
+    public Resource getImage (int itemId) throws DayBookException {
         Item item = getItemById(itemId);
         return pictureService.retrieveImage(item);
     }
 
     @Override
-    public void deleteItem(int itemId) {
-        itemDao.deleteItem(itemId);
+    public void deleteImage (int itemId) throws DayBookException {
+        Item item = getItemById(itemId);
+        item.setImagePath("");
+        item.setImageStatus(0);
+        updateItem(item);
     }
+
 }

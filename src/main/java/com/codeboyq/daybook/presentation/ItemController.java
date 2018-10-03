@@ -35,20 +35,22 @@ public class ItemController {
     private ModelMapper modelMapper;
 
     @GetMapping("/v1/items/{id}")
-    public ResponseEntity<?> getItem(@PathVariable(name = "id", required = false) Integer id) {
+    public ResponseEntity<?> getItem(@PathVariable(name = "id", required = true) Integer id) {
         List<ItemDto> items = new ArrayList<>();
-        if (id==null) {
-            itemService.getAllItems().forEach(itemEntity -> items.add(convertToDto(itemEntity)));
-        } else {
-            ItemDto itemDto;
-
-            try {
-                itemDto = convertToDto(itemService.getItemById(id));
-            } catch (DayBookException e) {
-                return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getMessage());
-            }
-            items.add(itemDto);
+        ItemDto itemDto;
+        try {
+            itemDto = convertToDto(itemService.getItemById(id));
+        } catch (DayBookException e) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getMessage());
         }
+        items.add(itemDto);
+        return ResponseEntity.ok(items);
+    }
+
+    @GetMapping("/v1/items")
+    public ResponseEntity<?> getItems() {
+        List<ItemDto> items = new ArrayList<>();
+        itemService.getAllItems().forEach(itemEntity -> items.add(convertToDto(itemEntity)));
         return ResponseEntity.ok(items);
     }
 
@@ -137,6 +139,14 @@ public class ItemController {
                 imageFile.getSize());
 
         return ResponseEntity.ok(frDto);
+    }
+
+    @DeleteMapping("/v1/items/{id}/image")
+    public ResponseEntity<Void> deleteImage(@PathVariable(name = "id", required = true) int itemId) throws Exception {
+
+        itemService.deleteImage(itemId);
+
+        return ResponseEntity.ok().build();
     }
 
     private ItemDto convertToDto(Item item) {

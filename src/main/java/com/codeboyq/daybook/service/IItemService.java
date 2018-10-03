@@ -21,5 +21,7 @@ public interface IItemService {
 
     Path setImage (int itemId, InputStream is, String dosExtension) throws DayBookException;
 
-    Resource getImage (int itemId) throws Exception;
+    Resource getImage (int itemId) throws DayBookException;
+
+    void deleteImage (int itemId) throws DayBookException;
 }

@@ -62,17 +62,17 @@ public class PictureService implements IPictureService {
         return filePath;
     }
 
-    public Resource retrieveImage(Item item) throws Exception {
+    public Resource retrieveImage(Item item) throws DayBookException {
         try {
             Path filePath = Paths.get(item.getImagePath()).normalize();
             Resource resource = new UrlResource(filePath.toUri());
             if(resource.exists()) {
                 return resource;
             } else {
-                throw new Exception("File not found");
+                throw new DayBookException("File not found");
             }
         } catch (MalformedURLException ex) {
-            throw new Exception("File not found", ex);
+            throw new DayBookException("File not found", ex);
         }
     }
 }
