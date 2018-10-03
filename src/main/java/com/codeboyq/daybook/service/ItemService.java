@@ -67,7 +67,7 @@ public class ItemService implements IItemService {
     @Override
     public Resource getImage (int itemId) throws Exception {
         Item item = getItemById(itemId);
-        return pictureService.getImage(item);
+        return pictureService.retrieveImage(item);
     }
 
     @Override

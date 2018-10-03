@@ -62,7 +62,7 @@ public class PictureServicesTest {
         item.setPublished(false);
 
         //Get image
-       // Resource image = pictureService.getImage(item);
+       // Resource image = pictureService.retrieveImage(item);
         //System.out.println(image.exists());
 
 

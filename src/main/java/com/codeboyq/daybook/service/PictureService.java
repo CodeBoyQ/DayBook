@@ -62,7 +62,7 @@ public class PictureService implements IPictureService {
         return filePath;
     }
 
-    public Resource getImage(Item item) throws Exception {
+    public Resource retrieveImage(Item item) throws Exception {
         try {
             Path filePath = Paths.get(item.getImagePath()).normalize();
             Resource resource = new UrlResource(filePath.toUri());

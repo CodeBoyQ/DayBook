@@ -39,6 +39,7 @@ public class ItemDao implements IItemDao {
         Item uItem = getItemById(item.getId());
         uItem.setDate(item.getDate());
         uItem.setText(item.getText());
+        uItem.setPublished(item.getPublished());
         entityManager.flush();
         return uItem;
     }
