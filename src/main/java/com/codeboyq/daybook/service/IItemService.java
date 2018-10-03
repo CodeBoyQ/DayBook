@@ -3,6 +3,7 @@ package com.codeboyq.daybook.service;
 import com.codeboyq.daybook.entity.Item;
 
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.List;
 
 public interface IItemService {
@@ -16,5 +17,5 @@ public interface IItemService {
 
     void deleteItem(int itemId);
 
-    void setImage (int itemId, InputStream is) throws Exception;
+    Path setImage (int itemId, InputStream is, String dosExtension) throws Exception;
 }

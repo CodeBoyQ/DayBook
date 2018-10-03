@@ -44,11 +44,12 @@ public class ItemService implements IItemService {
     }
 
     @Override
-    public void setImage(int itemId, InputStream is) throws Exception {
+    public Path setImage(int itemId, InputStream is, String dosExtension) throws Exception {
         Item item = getItemById(itemId);
-        Path storedPath = pictureService.storeImage(item, is);
+        Path storedPath = pictureService.storeImage(item, is, dosExtension);
         item.setImagePath(storedPath.toString());
         updateItem(item);
+        return storedPath;
     }
 
     @Override

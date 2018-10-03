@@ -1,25 +1,21 @@
 package com.codeboyq.daybook.api.dto;
 
 public class FileUploadResponseDto {
-    private String fileName;
+    private int itemId;
     private String fileDownloadUri;
     private String fileType;
     private long size;
 
-    public FileUploadResponseDto(String fileName, String fileDownloadUri, String fileType, long size) {
-        this.fileName = fileName;
+    public FileUploadResponseDto(int itemId, String fileDownloadUri, String fileType, long size) {
+        this.itemId = itemId;
         this.fileDownloadUri = fileDownloadUri;
         this.fileType = fileType;
         this.size = size;
     }
 
-    public String getFileName() {
-        return fileName;
-    }
+    public int getItemId() { return itemId; }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
+    public void setItemId(int itemId) { this.itemId = itemId; }
 
     public String getFileDownloadUri() {
         return fileDownloadUri;

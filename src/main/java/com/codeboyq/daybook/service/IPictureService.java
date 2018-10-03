@@ -7,5 +7,5 @@ import java.nio.file.Path;
 
 public interface IPictureService {
 
-    Path storeImage(Item item, InputStream is) throws Exception;
+    Path storeImage(Item item, InputStream is, String dosExtension) throws Exception;
 }

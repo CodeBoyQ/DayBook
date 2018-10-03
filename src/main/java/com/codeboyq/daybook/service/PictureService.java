@@ -15,7 +15,7 @@ public class PictureService implements IPictureService {
 
     public static String  REPOSITORY = "src/main/resources/repo";
 
-    public Path storeImage(Item item, InputStream is) throws Exception {
+    public Path storeImage(Item item, InputStream is, String dosExtension) throws Exception {
         LocalDate date = item.getDate();
         if (date == null) {
             throw new Exception();
@@ -37,7 +37,7 @@ public class PictureService implements IPictureService {
         //Construct the file path
         Path filePath = Paths.get(
                 folderPath.toString(),
-                String.format("%02d", date.getDayOfMonth()).concat(".jpg")
+                String.format("%02d", date.getDayOfMonth()).concat("." + dosExtension)
         );
 
         //Create the file

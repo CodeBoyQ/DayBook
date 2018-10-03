@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,21 +29,25 @@ public class ItemController {
     private ModelMapper modelMapper;
 
     @PutMapping("/v1/setimage")
-    public ResponseEntity<FileUploadResponseDto> uploadFile(@RequestParam(name = "id", required = true) String itemId, @RequestParam("image") MultipartFile imageFile) {
+    public ResponseEntity<?> uploadFile(@RequestParam(name = "id", required = true) int itemId, @RequestParam("image") MultipartFile imageFile) throws Exception {
 
+        String dosExtension;
+        if (imageFile.getContentType().equals("image/jpeg")) {
+            dosExtension = "jpg";
+        } else if (imageFile.getContentType().equals("image/png")) {
+            dosExtension = "png";
+        } else {
+            return new ResponseEntity<String>("The file is not a jpg or png. Please provide a jpg or png file", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
 
-        String fileName = imageFile.getOriginalFilename() + " " + itemId;
+        Path destinationPath = itemService.setImage(itemId, imageFile.getInputStream(), dosExtension);
 
-       // imageFile.getInputStream()
-//        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-//                .path("/downloadFile/")
-//                .path(fileName)
-//                .toUriString();
+        FileUploadResponseDto frDto = new FileUploadResponseDto(
+                itemId,
+                destinationPath.toString(),
+                imageFile.getContentType(),
+                imageFile.getSize());
 
-
-
-        FileUploadResponseDto frDto = new FileUploadResponseDto(fileName, "Dit is waar het bestand terecht is gekomen" + itemId,
-                imageFile.getContentType(), imageFile.getSize());
         return new ResponseEntity<FileUploadResponseDto>(frDto, HttpStatus.OK);
     }
 

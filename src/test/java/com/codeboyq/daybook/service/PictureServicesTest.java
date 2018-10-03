@@ -41,7 +41,7 @@ public class PictureServicesTest {
         File testPlaatje = new File("src/test/resources/plaatje.jpg");
 
         //Store the test image to the repository
-        Path destinationPath = pictureService.storeImage(item, new FileInputStream(testPlaatje));
+        Path destinationPath = pictureService.storeImage(item, new FileInputStream(testPlaatje), "jpg");
 
         Assert.assertEquals(Paths.get(PictureService.REPOSITORY, "2018", "08", "23.jpg"), destinationPath);
 
